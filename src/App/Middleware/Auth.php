@@ -9,7 +9,11 @@ class Auth implements MiddlewareInterface
 {
     public function __invoke(Request $request, Response $response, callable $out = null)
     {
-        if(! $request->hasHeader('authorization')){
+         if ($request->getUri()->getPath() == '/login') {
+             return $out($request, $response);
+         }
+
+        if(! $request->hasHeader('token')){
             return $response->withStatus(401);
         }
 
@@ -20,10 +24,15 @@ class Auth implements MiddlewareInterface
         return $out($request, $response);
     }
 
+
     private function isValid(Request $request)
     {
-        $token = $request->getHeader('authorization');
-        //validar o token de alguma forma...
-        return true;
+        try{
+            $token = $request->getHeader('token');
+            $jwtDecode = \Firebase\JWT\JWT::decode($token[0],'webdev', ["HS256"]);
+            return true;
+        }catch (\Exception $e){
+            return false;
+        }
     }
 }
