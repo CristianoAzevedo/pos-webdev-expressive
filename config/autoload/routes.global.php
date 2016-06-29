@@ -7,6 +7,7 @@
                 App\Action\PingAction::class                  => App\Action\PingAction::class,
                 App\Middleware\Format\Json::class             => App\Middleware\Format\Json::class,
                 App\Middleware\Validate::class                => App\Middleware\Validate::class,
+                 App\Middleware\LoginValidate::class          => App\Middleware\LoginValidate::class,
             ],
             'factories'  => [
                 App\Action\HomePageAction::class       => App\Action\HomePageFactory::class,
@@ -29,7 +30,10 @@
             [
                 'name'            => 'login',
                 'path'            => '/login',
-                'middleware'      => App\Action\Login\Authentication::class,
+                'middleware'      => [
+                    App\Middleware\LoginValidate::class,
+                    App\Action\Login\Authentication::class,
+                ],
                 'allowed_methods' => ['POST'],
             ],
             [
@@ -77,6 +81,7 @@
                 ],
                 'allowed_methods' => ['DELETE'],
             ],
+            
         
         ],
     ];
