@@ -1,15 +1,17 @@
 <?php
 
-namespace App\Model\Login;
+namespace App\Model;
 
 use Zend\InputFilter\InputFilter;
 
-class Login {
+class Login
+{
 
     public $name;
     public $password;
 
-    public function getInputFilter() {
+    public function getInputFilter()
+    {
         $inputFilter = new InputFilter();
 
         $inputFilter->add(array(
@@ -38,7 +40,19 @@ class Login {
                 array('name' => 'StripTags'),
                 array('name' => 'StringTrim'),
             ),
+            'validators' => array(
+                array(
+                    'name' => 'StringLength',
+                    'options' => array(
+                        'encoding' => 'UTF-8',
+                        'min' => 1,
+                        'max' => 100,
+                    ),
+                ),
+            ),
         ));
+
+        return $inputFilter;
     }
 
 }

@@ -2,9 +2,9 @@
 
 namespace App\Middleware;
 
-use Zend\Stratigility\MiddlewareInterface;
-use Psr\Http\Message\ServerRequestInterface as Request;
 use Psr\Http\Message\ResponseInterface as Response;
+use Psr\Http\Message\ServerRequestInterface as Request;
+use Zend\Stratigility\MiddlewareInterface;
 
 class LoginValidate implements MiddlewareInterface
 {

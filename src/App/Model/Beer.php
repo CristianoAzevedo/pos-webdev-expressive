@@ -13,7 +13,7 @@ class Beer
     /**
      * Configura os filtros dos campos da classe
      *
-     * @return Zend\InputFilter\InputFilter
+     * @return \Zend\InputFilter\InputFilter
      */
     public function getInputFilter()
     {
